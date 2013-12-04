@@ -58,17 +58,17 @@ public class TransactionController {
         
 	}
 		
-	@RequestMapping(value="/update/{name}", method = RequestMethod.GET)
-	public String getUpdateCustomerPage(@PathVariable String name, 
+	@RequestMapping(value="/updateTranaction/{trans_uid}", method = RequestMethod.GET)
+	public String getUpdateCustomerPage(@PathVariable String transactionUID, 
 			HttpServletRequest request, ModelMap model) {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		Query query = new Query("Customer");
-		query.addFilter("name", FilterOperator.EQUAL, name);
+		Query query = new Query("Transaction");
+		query.addFilter("trans_uid", FilterOperator.EQUAL, transactionUID);
 		PreparedQuery pq = datastore.prepare(query);
 		
 		Entity e = pq.asSingleEntity();
-		model.addAttribute("customer",  e);
+		model.addAttribute("Transaction",  e);
 		
 		return "update";
 
@@ -99,36 +99,36 @@ public class TransactionController {
         
 	}
 		
-	@RequestMapping(value="/delete/{name}", method = RequestMethod.GET)
-	public ModelAndView delete(@PathVariable String name,
+	@RequestMapping(value="/deleteTransaction/{trans_uid}", method = RequestMethod.GET)
+	public ModelAndView delete(@PathVariable String transactionUID,
 			HttpServletRequest request, ModelMap model) {
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         
-        Query query = new Query("Customer");
-		query.addFilter("name", FilterOperator.EQUAL, name);
+        Query query = new Query("Transaction");
+		query.addFilter("trans_uid", FilterOperator.EQUAL, transactionUID);
 		PreparedQuery pq = datastore.prepare(query);
-		Entity customer = pq.asSingleEntity();
+		Entity transaction = pq.asSingleEntity();
 		
-        datastore.delete(customer.getKey());
+        datastore.delete(transaction.getKey());
         
         //return to list
-        return new ModelAndView("redirect:../list");
+        return new ModelAndView("redirect:../listTransaction");
         
 	}
 	
 	
 	//get all customers
-	@RequestMapping(value="/list", method = RequestMethod.GET)
+	@RequestMapping(value="/listTransaction", method = RequestMethod.GET)
 	public String listCustomer(ModelMap model) {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		Query query = new Query("Customer").addSort("date", Query.SortDirection.DESCENDING);
+		Query query = new Query("Transaction").addSort("creat_date", Query.SortDirection.DESCENDING);
 	    List<Entity> customers = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(10));
 	    
-	    model.addAttribute("customerList",  customers);
+	    model.addAttribute("transactionList",  customers);
 	    
-		return "list";
+		return "listTransaction";
 
 	}
 	
