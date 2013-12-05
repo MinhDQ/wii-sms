@@ -2,7 +2,7 @@
 <%@ page import="com.google.appengine.api.datastore.Entity" %>
 <html>
 <body>
-	<h1>GAE + Spring 3 MVC REST + CRUD Example</h1>
+	<h1>Wii SMS</h1>
 
 	Function : <a href="addCustomerPage">Add Customer</a>
 	<hr />

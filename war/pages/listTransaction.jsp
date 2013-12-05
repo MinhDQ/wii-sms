@@ -2,9 +2,9 @@
 <%@ page import="com.google.appengine.api.datastore.Entity" %>
 <html>
 <body>
-	<h1>GAE + Spring 3 MVC REST + CRUD Example</h1>
+	<h1>Wii SMS</h1>
 
-	Function : <a href="addCustomerPage">Add Customer</a>
+	Function : <a href="addTransactionPage">Add Transaction</a>
 	<hr />
 
 	<h2>All Customers</h2>
@@ -24,9 +24,9 @@
 		     
 		%>
 			<tr>
-				<td><%=e.getProperty("name") %></td>
-				<td><%=e.getProperty("email") %></td>
-				<td><%=e.getProperty("date") %></td>
+				<td><%=e.getProperty("sender_num") %></td>
+				<td><%=e.getProperty("amount") %></td>
+				<td><%=e.getProperty("create_date") %></td>
 				<td><a href="update/<%=e.getProperty("name")%>">Update</a> | <a href="delete/<%=e.getProperty("name")%>">Delete</a></td>
 			</tr>
 		<%
