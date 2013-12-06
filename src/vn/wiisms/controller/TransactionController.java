@@ -19,6 +19,8 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
@@ -84,14 +86,16 @@ public class TransactionController {
         
         return receiverNumber + ":" + senderNumber + "_" + amount + "_" + description;
 	}
-		
-	@RequestMapping(value="/updateTranaction/{trans_uid}", method = RequestMethod.GET)
+	
+	@RequestMapping(value="/updateTranaction/{transactionUID}", method = RequestMethod.GET)
 	public String getUpdateCustomerPage(@PathVariable String transactionUID, 
 			HttpServletRequest request, ModelMap model) {
+		
+        Key key = KeyFactory.createKey("Transaction", Long.valueOf(transactionUID));
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query query = new Query("Transaction");
-		query.addFilter("trans_uid", FilterOperator.EQUAL, transactionUID);
+		query.addFilter("__key__", FilterOperator.EQUAL, key);
 		PreparedQuery pq = datastore.prepare(query);
 		
 		Entity e = pq.asSingleEntity();
@@ -101,39 +105,27 @@ public class TransactionController {
 
 	}
 	
-	@RequestMapping(value="/update", method = RequestMethod.POST)
+	@RequestMapping(value="/updateTransaction", method = RequestMethod.POST)
 	public ModelAndView update(HttpServletRequest request, ModelMap model) {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		 
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String originalName =  request.getParameter("originalName");
-		
-		Query query = new Query("Customer");
-		query.addFilter("name", FilterOperator.EQUAL, originalName);
-		PreparedQuery pq = datastore.prepare(query);
-		Entity customer = pq.asSingleEntity();
-		
-		customer.setProperty("name", name);
-		customer.setProperty("email", email);
-		customer.setProperty("date", new Date());
-
-        datastore.put(customer);
-        
+ 
         //return to list
         return new ModelAndView("redirect:list");
         
 	}
 		
-	@RequestMapping(value="/deleteTransaction/{trans_uid}", method = RequestMethod.GET)
+	@RequestMapping(value="/deleteTransaction/{transactionUID}", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable String transactionUID,
 			HttpServletRequest request, ModelMap model) {
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         
+        Key key = KeyFactory.createKey("Transaction", Long.valueOf(transactionUID));
+        
         Query query = new Query("Transaction");
-		query.addFilter("trans_uid", FilterOperator.EQUAL, transactionUID);
+		query.addFilter("__key__", FilterOperator.EQUAL, key);
 		PreparedQuery pq = datastore.prepare(query);
 		Entity transaction = pq.asSingleEntity();
 		
@@ -154,9 +146,9 @@ public class TransactionController {
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query query = new Query("Transaction").addSort("create_date", Query.SortDirection.DESCENDING);
-	    List<Entity> customers = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(10));
+	    List<Entity> transactions = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(10));
 	    
-	    model.addAttribute("transactionList",  customers);
+	    model.addAttribute("transactionList",  transactions);
 	    
 		return "listTransaction";
 

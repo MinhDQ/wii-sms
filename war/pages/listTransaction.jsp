@@ -27,7 +27,7 @@
 				<td><%=e.getProperty("sender_num") %></td>
 				<td><%=e.getProperty("amount") %></td>
 				<td><%=e.getProperty("create_date") %></td>
-				<td><a href="update/<%=e.getProperty("name")%>">Update</a> | <a href="delete/<%=e.getProperty("name")%>">Delete</a></td>
+				<td><a href="updateTransaction/<%=e.getKey().getId()%>">Update</a> | <a href="deleteTransaction/<%=e.getKey().getId()%>">Delete</a></td>
 			</tr>
 		<%
 			}
