@@ -7,12 +7,12 @@
 	Function : <a href="addTransactionPage">Add Transaction</a>
 	<hr />
 
-	<h2>All Customers</h2>
+	<h2>All Transactions</h2>
 	<table border="1">
 		<thead>
 			<tr>
-				<td>Name</td>
-				<td>Email</td>
+				<td>Sender</td>
+				<td>Amount</td>
 				<td>Created Date</td>
 				<td>Action</td>
 			</tr>

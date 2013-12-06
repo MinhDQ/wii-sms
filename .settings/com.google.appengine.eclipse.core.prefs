@@ -3,3 +3,5 @@ filesCopiedToWebInfLib=appengine-api-1.0-sdk-1.8.8.jar|appengine-api-labs.jar|ap
 gaeDeployDialogSettings=
 gaeHrdEnabled=true
 gaeIsEclipseDefaultInstPath=true
+googleCloudSqlEnabled=false
+localDevMySqlEnabled=true

@@ -40,32 +40,7 @@ public class TransactionController {
 	@RequestMapping(value="/newTransaction", method = RequestMethod.POST)
 	public ModelAndView add(HttpServletRequest request, ModelMap model) {
 		
-		String 		senderNumber 	= request.getParameter("sender");
-		String 		originalSMS 	= request.getParameter("sms");
-		String[] 	smsMess 		= originalSMS.split("_",3);
-
-		String 	receiverNumber 		= smsMess[0];
-		int 	amount 				= Integer.parseInt(smsMess[1]);
-		String 	description 		= smsMess[2];
-		
-		Date createDate = new Date();
-		UserService userService = UserServiceFactory.getUserService();
-        User user = userService.getCurrentUser();
-        
-        Entity transaction = new Entity("Transaction");
-        transaction.setProperty("sender_num", senderNumber);
-        transaction.setProperty("receir_num", receiverNumber);
-        transaction.setProperty("origin_sms", originalSMS);
-        transaction.setProperty("amount", amount);
-        transaction.setProperty("desc", description);
-        transaction.setProperty("status", TransactionStatus.NEW.toString());
-        transaction.setProperty("create_date", createDate);
-        transaction.setProperty("modifi_date", createDate);		//new transaction
-        transaction.setProperty("create_user", user);
-        transaction.setProperty("modifi_user", user);			//new transaction
-
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        datastore.put(transaction);
+		addTransaction(request);
         
         return new ModelAndView("redirect:listTransaction");
         
@@ -73,6 +48,12 @@ public class TransactionController {
 	
 	@RequestMapping(value="/newTransaction8x00", method = RequestMethod.POST)
 	public String add8x00(HttpServletRequest request, ModelMap model) {
+				        
+        return addTransaction(request);
+        
+	}
+	
+	private String addTransaction (HttpServletRequest request) {
 		
 		String 		senderNumber 	= request.getParameter("sender");
 		String 		originalSMS 	= request.getParameter("sms");
@@ -102,7 +83,6 @@ public class TransactionController {
         datastore.put(transaction);
         
         return receiverNumber + ":" + senderNumber + "_" + amount + "_" + description;
-        
 	}
 		
 	@RequestMapping(value="/updateTranaction/{trans_uid}", method = RequestMethod.GET)
@@ -173,7 +153,7 @@ public class TransactionController {
 			return "loginPage";
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		Query query = new Query("Transaction").addSort("creat_date", Query.SortDirection.DESCENDING);
+		Query query = new Query("Transaction").addSort("create_date", Query.SortDirection.DESCENDING);
 	    List<Entity> customers = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(10));
 	    
 	    model.addAttribute("transactionList",  customers);
