@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import vn.wiisms.enums.TransactionStatus;
@@ -18,8 +19,6 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
@@ -69,6 +68,40 @@ public class TransactionController {
         datastore.put(transaction);
         
         return new ModelAndView("redirect:listTransaction");
+        
+	}
+	
+	@RequestMapping(value="/newTransaction8x00", method = RequestMethod.POST)
+	public String add8x00(HttpServletRequest request, ModelMap model) {
+		
+		String 		senderNumber 	= request.getParameter("sender");
+		String 		originalSMS 	= request.getParameter("sms");
+		String[] 	smsMess 		= originalSMS.split("_",3);
+
+		String 	receiverNumber 		= smsMess[0];
+		int 	amount 				= Integer.parseInt(smsMess[1]);
+		String 	description 		= smsMess[2];
+		
+		Date createDate = new Date();
+		UserService userService = UserServiceFactory.getUserService();
+        User user = userService.getCurrentUser();
+        
+        Entity transaction = new Entity("Transaction");
+        transaction.setProperty("sender_num", senderNumber);
+        transaction.setProperty("receir_num", receiverNumber);
+        transaction.setProperty("origin_sms", originalSMS);
+        transaction.setProperty("amount", amount);
+        transaction.setProperty("desc", description);
+        transaction.setProperty("status", TransactionStatus.NEW.toString());
+        transaction.setProperty("create_date", createDate);
+        transaction.setProperty("modifi_date", createDate);		//new transaction
+        transaction.setProperty("create_user", user);
+        transaction.setProperty("modifi_user", user);			//new transaction
+
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        datastore.put(transaction);
+        
+        return receiverNumber + ":" + senderNumber + "_" + amount + "_" + description;
         
 	}
 		
