@@ -20,6 +20,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 
 @Controller
@@ -60,8 +61,11 @@ public class CustomerController {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query query = new Query("Customer");
-		query.addFilter("name", FilterOperator.EQUAL, name);
-		PreparedQuery pq = datastore.prepare(query);
+        query.setFilter(CompositeFilterOperator.and(
+      		  FilterOperator.EQUAL.of("name", name)
+      		  )
+      		);
+        PreparedQuery pq = datastore.prepare(query);
 		
 		Entity e = pq.asSingleEntity();
 		model.addAttribute("customer",  e);
@@ -80,7 +84,11 @@ public class CustomerController {
 		String originalName =  request.getParameter("originalName");
 		
 		Query query = new Query("Customer");
-		query.addFilter("name", FilterOperator.EQUAL, originalName);
+		query.setFilter(CompositeFilterOperator.and(
+	      		  FilterOperator.EQUAL.of("name", originalName)
+	      		  )
+	      		);			
+		
 		PreparedQuery pq = datastore.prepare(query);
 		Entity customer = pq.asSingleEntity();
 		
@@ -102,8 +110,11 @@ public class CustomerController {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         
         Query query = new Query("Customer");
-		query.addFilter("name", FilterOperator.EQUAL, name);
-		PreparedQuery pq = datastore.prepare(query);
+        query.setFilter(CompositeFilterOperator.and(
+	      		  FilterOperator.EQUAL.of("name", name)
+	      		  )
+	      		);
+        PreparedQuery pq = datastore.prepare(query);
 		Entity customer = pq.asSingleEntity();
 		
         datastore.delete(customer.getKey());

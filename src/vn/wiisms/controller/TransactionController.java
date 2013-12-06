@@ -24,6 +24,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -49,6 +50,7 @@ public class TransactionController {
 	}
 	
 	@RequestMapping(value="/newTransaction8x00", method = RequestMethod.POST)
+	@ResponseBody
 	public String add8x00(HttpServletRequest request, ModelMap model) {
 				        
         return addTransaction(request);
@@ -95,7 +97,10 @@ public class TransactionController {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query query = new Query("Transaction");
-		query.addFilter("__key__", FilterOperator.EQUAL, key);
+        query.setFilter(CompositeFilterOperator.and(
+        		  FilterOperator.EQUAL.of("__key__", key)
+        		  )
+        		);
 		PreparedQuery pq = datastore.prepare(query);
 		
 		Entity e = pq.asSingleEntity();
@@ -108,7 +113,7 @@ public class TransactionController {
 	@RequestMapping(value="/updateTransaction", method = RequestMethod.POST)
 	public ModelAndView update(HttpServletRequest request, ModelMap model) {
 
-		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		//DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		 
  
         //return to list
@@ -125,8 +130,12 @@ public class TransactionController {
         Key key = KeyFactory.createKey("Transaction", Long.valueOf(transactionUID));
         
         Query query = new Query("Transaction");
-		query.addFilter("__key__", FilterOperator.EQUAL, key);
-		PreparedQuery pq = datastore.prepare(query);
+        query.setFilter(CompositeFilterOperator.and(
+        		  FilterOperator.EQUAL.of("__key__", key)
+        		  )
+        		);
+
+        PreparedQuery pq = datastore.prepare(query);
 		Entity transaction = pq.asSingleEntity();
 		
         datastore.delete(transaction.getKey());
