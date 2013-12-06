@@ -24,7 +24,6 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
-import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -97,10 +96,7 @@ public class TransactionController {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query query = new Query("Transaction");
-        query.setFilter(CompositeFilterOperator.and(
-        		  FilterOperator.EQUAL.of("__key__", key)
-        		  )
-        		);
+        query.setFilter(FilterOperator.EQUAL.of("__key__", key));
 		PreparedQuery pq = datastore.prepare(query);
 		
 		Entity e = pq.asSingleEntity();
@@ -130,10 +126,7 @@ public class TransactionController {
         Key key = KeyFactory.createKey("Transaction", Long.valueOf(transactionUID));
         
         Query query = new Query("Transaction");
-        query.setFilter(CompositeFilterOperator.and(
-        		  FilterOperator.EQUAL.of("__key__", key)
-        		  )
-        		);
+        query.setFilter(FilterOperator.EQUAL.of("__key__", key));
 
         PreparedQuery pq = datastore.prepare(query);
 		Entity transaction = pq.asSingleEntity();
