@@ -13,7 +13,7 @@
 		String loginURL = UserServiceFactory.getUserService().createLoginURL("/");
 		     
 		%>
-	<a href="<%=loginURL%>">Add Customer</a>
+	Login? <a href="<%=loginURL%>">Click here</a>
 
 </body>
 </html>
