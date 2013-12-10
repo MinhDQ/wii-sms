@@ -1,5 +1,4 @@
-<html>
-<body>
+    <jsp:include page="header.jsp"/>
 	<h1>Add Customer</h1>
 
 	<form method="post" action="add">
@@ -17,6 +16,4 @@
 		</table>
 		<input type="submit" class="save" title="Save" value="Save" />
 	</form>
-
-</body>
-</html>
+    <jsp:include page="footer.jsp"/>

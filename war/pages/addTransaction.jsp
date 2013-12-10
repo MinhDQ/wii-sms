@@ -1,5 +1,5 @@
-<html>
-<body>
+	<jsp:include page="header.jsp"/>
+
 	<h1>Add Transaction</h1>
 
 	<form method="post" action="newTransaction">
@@ -18,5 +18,4 @@
 		<input type="submit" class="save" title="Save" value="Save" />
 	</form>
 
-</body>
-</html>
+    <jsp:include page="footer.jsp"/>

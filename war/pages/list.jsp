@@ -1,9 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.google.appengine.api.datastore.Entity" %>
-<html>
-<body>
-	<h1>Wii SMS</h1>
-
+    <jsp:include page="header.jsp"/>
 	Function : <a href="addCustomerPage">Add Customer</a>
 	<hr />
 
@@ -34,5 +31,4 @@
 		%>
 	</table>
 
-</body>
-</html>
+    <jsp:include page="footer.jsp"/>

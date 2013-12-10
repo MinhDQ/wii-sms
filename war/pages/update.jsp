@@ -1,6 +1,5 @@
 <%@ page import="com.google.appengine.api.datastore.Entity" %>
-<html>
-<body>
+    <jsp:include page="header.jsp"/>
 	<h1>Update Customer</h1>
 	
 	<%
@@ -34,5 +33,4 @@
 		<input type="submit" class="update" title="Update" value="Update" />
 	</form>
 	
-</body>
-</html>
+    <jsp:include page="footer.jsp"/>
