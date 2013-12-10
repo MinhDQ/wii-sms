@@ -17,26 +17,27 @@
   	<meta name="keywords" content="how to use paypal, pay with paypal, set up paypal account">
         <meta name="description" content="Learn how to set up a PayPal Vietnam account and start paying online.">
         <link rel="canonical" href="https://www.paypal.com/vn/webapps/mpp/how-paypal-works">
-        <link rel="shortcut icon" href="https://www.paypalobjects.com/en_US/i/icon/pp_favicon_x.ico">
-	  	<link rel="apple-touch-icon" href="https://www.paypalobjects.com/en_US/i/pui/apple-touch-icon.png">
+        <link rel="shortcut icon" href="<c:url value="/pages/wii_files/pp_favicon_x.ico" />">
+	  	<link rel="apple-touch-icon" href="<c:url value="/pages/wii_files/apple-touch-icon.png" />">
 
+	  	<link href="<c:url value="/pages/wii_files/916e023bd96ef2afdd08ef21c46eb9.css" />" rel="stylesheet" type="text/css">
 	  	<link href="<c:url value="/pages/wii_files/ddae2804536f945421520ee9be5f6b.css" />" rel="stylesheet" type="text/css"><!--[if IE 9]>
-			<link href="https://www.paypalobjects.com/eboxapps/css/f7/bfd6de2c9202e7713cc48b061ccced.css"  rel="stylesheet" type="text/css" /><![endif]-->
+			<link href="<c:url value="/pages/wii_files/bfd6de2c9202e7713cc48b061ccced.css" />"  rel="stylesheet" type="text/css" /><![endif]-->
 		<!--[if IE 8]>
-			<link href="https://www.paypalobjects.com/eboxapps/css/99/11f3a08ac8d618ab0a490e209be941.css"  rel="stylesheet" type="text/css" /><![endif]-->
+			<link href="<c:url value="/pages/wii_files/11f3a08ac8d618ab0a490e209be941.css" />"  rel="stylesheet" type="text/css" /><![endif]-->
 		<!--[if IE 7]>
-			<link href="https://www.paypalobjects.com/eboxapps/css/0c/6e8f9302ab06c7e06699139f5e8376.css"  rel="stylesheet" type="text/css" /><![endif]-->
+			<link href="<c:url value="/pages/wii_files/6e8f9302ab06c7e06699139f5e8376.css" />"  rel="stylesheet" type="text/css" /><![endif]-->
 		<!--[if IE 6]>
-			<link href="https://www.paypalobjects.com/eboxapps/css/48/19a54257319c23f3b042ccc63e83fc.css"  rel="stylesheet" type="text/css" /><![endif]-->
+			<link href="<c:url value="/pages/wii_files/19a54257319c23f3b042ccc63e83fc.css" />"  rel="stylesheet" type="text/css" /><![endif]-->
 		<link href="<c:url value="/pages/wii_files/a28837097160c3d95d654741539edc.css" />" rel="stylesheet" type="text/css"><!--[if IE 8]>
 			<![endif]-->
 		<!--[if IE 7]>
 			<![endif]-->
 		<!--[if IE 6]>
 			<![endif]-->
-			<link href="https://www.paypalobjects.com/eboxapps/css/54/b21dae9a9de0242c6db4796d8d0ed1.css"  rel="stylesheet" type="text/css" /><![endif]-->
+			<link href="<c:url value="/pages/wii_files/b21dae9a9de0242c6db4796d8d0ed1.css" />"  rel="stylesheet" type="text/css" /><![endif]-->
 		<!--[if IE 7]>
-			<link href="https://www.paypalobjects.com/eboxapps/css/9b/754a71fb6146d56161cb473c7fb647.css"  rel="stylesheet" type="text/css" /><![endif]-->
+			<link href="<c:url value="/pages/wii_files/754a71fb6146d56161cb473c7fb647.css" />"  rel="stylesheet" type="text/css" /><![endif]-->
 		<!--[if IE 6]>
 			<![endif]-->
 		
@@ -414,3 +415,4 @@
 </div></header>
 <section tabindex="-1" id="content">
      		<section id="main" role="main">
+     			<div class="contentWrapper">
