@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class=" marketing js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths jsEnabled" lang="en"><head>
@@ -19,6 +17,12 @@
         <link rel="canonical" href="#">
         <link rel="shortcut icon" href="<c:url value="/pages/wii_files/pp_favicon_x.ico" />">
 	  	<link rel="apple-touch-icon" href="<c:url value="/pages/wii_files/apple-touch-icon.png" />">
+
+	<link href="/pages/css/maven-base.css" rel="stylesheet" type="text/css"/>
+	<link href="/pages/css/maven-theme.css" rel="stylesheet" type="text/css"/>
+	<link href="/pages/css/site.css" rel="stylesheet" type="text/css"/>
+	<link href="/pages/css/screen.css" rel="stylesheet" type="text/css"/>
+
 
 	  	<link href="<c:url value="/pages/wii_files/916e023bd96ef2afdd08ef21c46eb9.css" />" rel="stylesheet" type="text/css">
 	  	<link href="<c:url value="/pages/wii_files/ddae2804536f945421520ee9be5f6b.css" />" rel="stylesheet" type="text/css"><!--[if IE 9]>

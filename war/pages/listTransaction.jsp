@@ -1,36 +1,20 @@
-<%@ page import="java.util.List" %>
-<%@ page import="com.google.appengine.api.datastore.Entity" %>
+<jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:display="urn:jsptld:http://displaytag.sf.net">
+  <jsp:directive.page contentType="text/html; charset=UTF-8" />
+  <jsp:directive.page import="java.util.List" />
+  <jsp:directive.page import="com.google.appengine.api.datastore.Entity" />
+  <jsp:directive.page import="vn.wiisms.model.*" />
 
-	<jsp:include page="header.jsp"/>
+	<jsp:include page="header.jsp" flush="true"/>
     
-	Function : <a href="addTransactionPage">Add Transaction</a>
-	<hr />
-
 	<h2>All Transactions</h2>
-	<table border="1">
-		<thead>
-			<tr>
-				<td>Sender</td>
-				<td>Amount</td>
-				<td>Created Date</td>
-				<td>Action</td>
-			</tr>
-		</thead>
-		<%
-		
-			List<Entity> transactions = (List<Entity>)request.getAttribute("transactionList");
-		    for(Entity e : transactions){
-		     
-		%>
-			<tr>
-				<td><%=e.getProperty("sender_num") %></td>
-				<td><%=e.getProperty("amount") %></td>
-				<td><%=e.getProperty("create_date") %></td>
-				<td><a href="updateTransaction/<%=e.getKey().getId()%>">Update</a> | <a href="deleteTransaction/<%=e.getKey().getId()%>">Delete</a></td>
-			</tr>
-		<%
-			}
-		%>
-	</table>
 	
-    <jsp:include page="footer.jsp"/>
+  <jsp:scriptlet> request.setAttribute( "test", new ReportList(30) ); </jsp:scriptlet>
+  
+  
+  <display:table name="test" class="simple" pagesize="10">
+  	<display:setProperty name="paging.banner.placement" value="bottom"/>
+  </display:table>
+  
+    <jsp:include page="footer.jsp" flush="true"/>
+</jsp:root>
+    
