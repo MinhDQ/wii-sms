@@ -70,12 +70,12 @@ read the <a href="#">terms and conditions</a> carefully.</p>
 			    </div>
 		    </footer>
 	</div>
-    	<script src="wii_files/f25bad35e08d9ae4330a27e8fb09c9.js" type="text/javascript"></script>    	
-    	<script src="wii_files/ca566a1494665e119b074912ccac0f.js" type="text/javascript"></script><!--SiteCatalyst Code 
+    	<script src="/pages/wii_files/f25bad35e08d9ae4330a27e8fb09c9.js" type="text/javascript"></script>    	
+    	<script src="/pages/wii_files/ca566a1494665e119b074912ccac0f.js" type="text/javascript"></script><!--SiteCatalyst Code 
 Copyright 1997-2005 Omniture, Inc. 
 More info available at http://www.omniture.com -->
 
-<script type="text/javascript" src="wii_files/pp_jscode_080706.js"></script>
+<script type="text/javascript" src="/pages/wii_files/pp_jscode_080706.js"></script>
 
 
 
@@ -127,5 +127,5 @@ s.prop36="#";
 <noscript><img src="#" alt="" height="1" width="1" border="0"></noscript>
 <!-- DO NOT REMOVE THIS COMMENT -->
 <!-- End SiteCatalyst Code -->
-<script type="text/javascript" src="wii_files/pa.js"></script>
+<script type="text/javascript" src="/pages/wii_files/pa.js"></script>
 <div></div></body></html>
