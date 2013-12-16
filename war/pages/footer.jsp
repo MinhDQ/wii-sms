@@ -12,8 +12,8 @@
 			    <div class="footer">
 			    	<div class="footerNav clearfix"><div class="wrapper">
 					    	<ul class="topList">
-						    	<li><a href="#">About WiiSMS</a></li><li><a href="#">WiiSMS blog</a></li><li><a href="#">Jobs</a></li><li><a href="#">Site map</a></li><li><a href="#">eBay</a></li><li id="siteFeedback">
-										<script type="text/javascript">
+						    	<li><a href="#">About Wii</a></li><li><a href="#">Wii blog</a></li><li><a href="#">Site map</a></li>
+						    											<script type="text/javascript">
 			var siteCatalystPageName="";
 			var siteCatalystC7="";
 			var siteCatalystAccountNumber="";	
@@ -41,19 +41,18 @@
 				return _u;
 			}
 </script>
-<a href="#">Feedback</a></li>
+
 								</ul>
 							<div class="legal">
-								<p class="copyright">Copyright Â© 1999 - 2013 WiiSMS. All rights reserved.</p>
+								<p class="copyright">Copyright © 1999 - 2013 WiiSMS. All rights reserved.</p>
 							    <ul>
 								    	<li><a href="#">Privacy Policy</a></li>
 											    <li><a href="#">Legal Agreements</a></li>
 										    	</ul>
-								<p class="legalContent">Consumer advisory. - WiiSMS. Ltd. Users are advised to 
-read the <a href="#">terms and conditions</a> carefully.</p>
+								
 						   		</div>
 						</div>
-						<span class="countryList">
+						<!--span class="countryList">
 							<ul role="presentation" class="topList">
 								<li role="presentation" id="countrySelector">
 										<a aria-expanded="false" aria-label="Change Country" aria-haspopup="true" role="button" class="pageTrigger country vietnam countryBorder selected scTrack:button-country" href="#countryList">Vietnam</a><ul style="top: -111px;" id="countryList" class="dropdown">
@@ -63,7 +62,7 @@ read the <a href="#">terms and conditions</a> carefully.</p>
 										<div style="top: -117px;" class="pointer"></div>
 									</li>
 									</ul>
-				    	</span>
+				    	</span-->
 					</div>
 				   
 				   

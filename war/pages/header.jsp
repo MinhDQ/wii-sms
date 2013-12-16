@@ -15,7 +15,7 @@
   	<meta name="keywords" content="wii sms, wii, sms">
         <meta name="description" content="...">
         <link rel="canonical" href="#">
-        <link rel="shortcut icon" href="<c:url value="/pages/wii_files/pp_favicon_x.ico" />">
+        <!--link rel="shortcut icon" href="<c:url value="/pages/wii_files/pp_favicon_x.ico" />"-->
 	  	<link rel="apple-touch-icon" href="<c:url value="/pages/wii_files/apple-touch-icon.png" />">
 
 	<link href="/pages/css/maven-base.css" rel="stylesheet" type="text/css"/>
@@ -74,15 +74,15 @@
 				<ul>
 					<li style="" class="skip"><a href="#content"></a></li>
 					<li class="current personal">
-								<span class="scTrack:tab-personal"><a href="#">Personal</a></span>
+								<span class="scTrack:tab-personal"><a href="#">Front End</a></span>
 									</li>
 						<li class="business">
-								<span><a href="#">Business</a></span>
+								<span><a href="https://appengine.google.com/dashboard?&app_id=s~wii-sms">Back End</a></span>
 									</li>
 						</ul>
 			</nav>
 			<form action="#" name="login_form" method="post" class="formSmall login"><div class="multi lap">
-							<div id="login_emaildiv" class="textInput  beforeContFix ">
+							<!--div id="login_emaildiv" class="textInput  beforeContFix ">
 	<label for="login_email">
 		Email address</label>
 	<input id="login_email" name="login_email" type="text">
@@ -121,9 +121,11 @@
 												   </div>
 												</span>
 	</div>
-<input name="submit.x" class="button secondary" value="Log In" type="submit">
+	
+	-->
+<!--input name="submit.x" class="button secondary" value="Log In" type="submit"-->
 
-<span class="button primary"><a href="#">Sign Up</a></span>
+<span class="button primary"><a href="https://accounts.google.com/Login">Log In</a></span>
 										</div>
 						</form></div>
 	</div>
@@ -135,16 +137,14 @@
 				<li class="logo"><a href="/"><img src="<c:url value="/pages/wii_files/logo_100x37.png" />" alt="Wii Home"></a></li>
 				<li class="current dropdown">
 								<a aria-expanded="false" class="" href="#">List</a><ul>
-										<li><a tabindex="-1" href="/transaction/listTransaction">Transaction</a></li>
-										<li><a tabindex="-1" href="/customer/list">Transaction Hist</a></li>
-										<li class="last"><a tabindex="-1" href="/user/listUser">User</a></li>
+										<!--li><a tabindex="-1" href="/transaction/listTransaction">Transaction</a></li>
+										<li><a tabindex="-1" href="/customer/list">Transaction Hist</a></li-->
+										<li class="last"><a tabindex="-1" href="/transaction/listTransaction">Transaction</a></li>
 										</ul>
 								</li>
 							<li class="dropdown">
 								<a aria-expanded="false" class="" href="#">Add</a><ul>
-										<li><a tabindex="-1" href="/transaction/addTransactionPage">Transaction</a></li>
-										<li><a tabindex="-1" href="/transaction/addTransactionHistPage">Transaction Hist</a></li>
-										<li class="last"><a tabindex="-1" href="/user/addUserPage">User</a></li>
+										<li class="last"><a tabindex="-1" href="/transaction/addTransactionPage">Transaction</a></li>
 										</ul>
 								</li>
 							<li class="dropdown">

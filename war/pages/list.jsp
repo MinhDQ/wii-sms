@@ -7,10 +7,7 @@
 	<link href="/pages/css/site.css" rel="stylesheet" type="text/css"/>
 	<link href="/pages/css/screen.css" rel="stylesheet" type="text/css"/>
 
-  <h2>Simplest case, no columns</h2>
-
-  <jsp:scriptlet> request.setAttribute( "test", new ReportList(12) ); </jsp:scriptlet>
-  <display:table name="test" class="simple" pagesize="5"/>
+ 
 
   <p>The simplest possible usage of the table tag is to point the table tag at a java.util.List implementation and do
   nothing else. The table tag will iterate through the list and display a column for each property contained in the

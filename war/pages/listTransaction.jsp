@@ -8,11 +8,20 @@
     
 	<h2>All Transactions</h2>
 	
-  <jsp:scriptlet> request.setAttribute( "test", new ReportList(30) ); </jsp:scriptlet>
-  
-  
-  <display:table name="test" class="simple" pagesize="10">
+  <display:table name="transactionList" class="simple" pagesize="10">
   	<display:setProperty name="paging.banner.placement" value="bottom"/>
+  	 <display:column property="transUID" title="ID" class="idcol"/>
+  	 <display:column property="senderNumber" title="Sender"/>
+  	 <display:column property="receiverNumber" title="Receiver"/>
+  	 <display:column property="originalSMS" title="Original SMS"/>
+  	 <display:column property="amount" title="Amount"/>
+  	 <display:column property="description" title="Description"/>
+  	 <display:column property="status" title="Status"/>
+  	 <!--display:column property="createDate" title="Created Date"/>
+  	 <display:column property="modifiDate" title="Modified Date"/>
+  	 <display:column property="createUserName" title="Created User"/-->
+  	 <display:column property="modifiUserName" title="Modified User"/>
+  	   
   </display:table>
   
     <jsp:include page="footer.jsp" flush="true"/>
