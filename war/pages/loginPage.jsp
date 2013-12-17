@@ -11,9 +11,11 @@
 	<h2>Login</h2>
 	<%
 		String loginURL = UserServiceFactory.getUserService().createLoginURL("/");
+		String logoutURL = UserServiceFactory.getUserService().createLogoutURL("/");
 		     
 		%>
 	Login? <a href="<%=loginURL%>">Click here</a>
+	Logout? <a href="<%=logoutURL%>">Click here</a>
 
 </body>
 </html>

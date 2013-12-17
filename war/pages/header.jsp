@@ -26,7 +26,7 @@
 
 	  	<link href="<c:url value="/pages/wii_files/916e023bd96ef2afdd08ef21c46eb9.css" />" rel="stylesheet" type="text/css">
 	  	<link href="<c:url value="/pages/wii_files/ddae2804536f945421520ee9be5f6b.css" />" rel="stylesheet" type="text/css"><!--[if IE 9]>
-			<link href="<c:url value="/pages/wii_files/bfd6de2c9202e7713cc48b061ccced.css" />"  rel="stylesheet" type="text/css" /><![endif]-->
+			<link href="<c:url value="/pages/wii_files/bfd6de2c9202e7713cc48b061ccced.css" />"  rel="stylesheet" type="text/css" />
 		<!--[if IE 8]>
 			<link href="<c:url value="/pages/wii_files/11f3a08ac8d618ab0a490e209be941.css" />"  rel="stylesheet" type="text/css" /><![endif]-->
 		<!--[if IE 7]>
@@ -77,7 +77,7 @@
 								<span class="scTrack:tab-personal"><a href="#">Front End</a></span>
 									</li>
 						<li class="business">
-								<span><a href="https://appengine.google.com/dashboard?&app_id=s~wii-sms">Back End</a></span>
+								<span><a target="_blank" href="https://appengine.google.com/dashboard?&app_id=s~wii-sms">Back End</a></span>
 									</li>
 						</ul>
 			</nav>
@@ -125,7 +125,8 @@
 	-->
 <!--input name="submit.x" class="button secondary" value="Log In" type="submit"-->
 
-<span class="button primary"><a href="https://accounts.google.com/Login">Log In</a></span>
+<span class="button primary"><a href="http://1.wii-sms.appspot.com/transaction/login">Log In</a></span>
+<span class="button primary"><a href="http://1.wii-sms.appspot.com/transaction/login">Log Out</a></span>
 										</div>
 						</form></div>
 	</div>

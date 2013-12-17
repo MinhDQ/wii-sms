@@ -1,5 +1,5 @@
 package vn.wiisms.enums;
 
 public enum TransactionStatus {
-	NEW, PROCESSING, WAITING, FAIL, CLOSE;
+	NEW, PROCESSING, WAITING, SUCCESS, FAIL, CLOSE;
 }

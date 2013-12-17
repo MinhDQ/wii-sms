@@ -47,10 +47,30 @@ public class TransactionController {
 		return "error";
 
 	}
+	
 
+	@RequestMapping(value = "noPrivilege", method = RequestMethod.GET)
+	public String noPrivilege(ModelMap model) {
+
+		return "noPrivilege";
+
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(ModelMap model) {
+
+		return "loginPage";
+
+	}
+	
 	@RequestMapping(value = "/newTransaction", method = RequestMethod.POST)
 	public ModelAndView add(HttpServletRequest request, ModelMap model) {
 
+		if (!UserServiceFactory.getUserService().isUserLoggedIn())
+			return new ModelAndView("redirect:loginPage");
+		else if (!UserServiceFactory.getUserService().isUserAdmin())
+			return new ModelAndView("redirect:noPrivilege");
+		
 		String result = addTransaction(request);
 		model.addAttribute("error", result);
 
@@ -60,6 +80,10 @@ public class TransactionController {
 			return new ModelAndView("redirect:listTransaction");
 	}
 
+	//Parameters:
+	//	sender	: 0906243585
+	//	sms		: receiver_amount_<desc>
+	//			  09072135_150000_CHUYEN KHOAN
 	@RequestMapping(value = "/newTransaction8x00", method = RequestMethod.POST)
 	@ResponseBody
 	public String add8x00(HttpServletRequest request, ModelMap model) {
@@ -67,8 +91,159 @@ public class TransactionController {
 		return addTransaction(request);
 
 	}
+	
+	//Parameters:
+	//	id		: transaction UID return by newTransaction8x00
+	//	sms		: desc of the WS call.
+	@RequestMapping(value = "/closeTransaction8x00", method = RequestMethod.POST)
+	@ResponseBody
+	public String close8x00(HttpServletRequest request, ModelMap model) {
+
+		return closeTransaction(request);
+
+	}
+
+	//Parameters:
+	//	id		: transaction UID return by newTransaction8x00
+	//	sms		: desc of the WS call.
+	@RequestMapping(value = "/transactionSucc8x00", method = RequestMethod.POST)
+	@ResponseBody
+	public String succ8x00(HttpServletRequest request, ModelMap model) {
+
+		return succTransaction(request);
+
+	}
+
+	//Parameters:
+	//	id		: transaction UID return by newTransaction8x00
+	//	sms		: desc of the WS call.
+	@RequestMapping(value = "/transactionFail8x00", method = RequestMethod.POST)
+	@ResponseBody
+	public String fail8x00(HttpServletRequest request, ModelMap model) {
+
+		return failTransaction(request);
+
+	}
+
+	private String closeTransaction(HttpServletRequest request) {
+		
+		Date currentDate = new Date();
+		UserService userService = UserServiceFactory.getUserService();
+		User user = userService.getCurrentUser();
+		
+		String transactionUID = request.getParameter("id");
+		
+		Key key = KeyFactory.createKey("Transaction",
+				Long.valueOf(transactionUID));
+
+		DatastoreService datastore = DatastoreServiceFactory
+				.getDatastoreService();
+		Query query = new Query("Transaction");
+		query.setFilter(FilterOperator.EQUAL.of("__key__", key));
+		PreparedQuery pq = datastore.prepare(query);
+
+		Entity transaction = pq.asSingleEntity();
+		
+		transaction.setProperty("status", TransactionStatus.CLOSE.toString());
+		transaction.setProperty("modifi_date", currentDate); 
+		transaction.setProperty("modifi_user", user); 
+				
+		String id = datastore.put(transaction).toString();
+		
+		//add transaction history
+		Entity transactionHist = new Entity("TransactionHist", transaction.getKey());
+		transactionHist.setProperty("sms", request.getParameter("sms"));
+		transactionHist.setProperty("status", TransactionStatus.CLOSE.toString());
+		transactionHist.setProperty("create_date", currentDate);
+		transactionHist.setProperty("modifi_date", currentDate); 
+		transactionHist.setProperty("create_user", user);
+		transactionHist.setProperty("modifi_user", user); 
+		
+		datastore.put(transactionHist);
+		
+		return "Close " + id + ": SUCCESS";
+	}
+	
+private String succTransaction(HttpServletRequest request) {
+		
+		Date currentDate = new Date();
+		UserService userService = UserServiceFactory.getUserService();
+		User user = userService.getCurrentUser();
+		
+		String transactionUID = request.getParameter("id");
+		
+		Key key = KeyFactory.createKey("Transaction",
+				Long.valueOf(transactionUID));
+
+		DatastoreService datastore = DatastoreServiceFactory
+				.getDatastoreService();
+		Query query = new Query("Transaction");
+		query.setFilter(FilterOperator.EQUAL.of("__key__", key));
+		PreparedQuery pq = datastore.prepare(query);
+
+		Entity transaction = pq.asSingleEntity();
+		
+		transaction.setProperty("status", TransactionStatus.SUCCESS.toString());
+		transaction.setProperty("modifi_date", currentDate); 
+		transaction.setProperty("modifi_user", user); 
+				
+		String id = datastore.put(transaction).toString();
+		
+		//add transaction history
+		Entity transactionHist = new Entity("TransactionHist", transaction.getKey());
+		transactionHist.setProperty("sms", request.getParameter("sms"));
+		transactionHist.setProperty("status", TransactionStatus.SUCCESS.toString());
+		transactionHist.setProperty("create_date", currentDate);
+		transactionHist.setProperty("modifi_date", currentDate); 
+		transactionHist.setProperty("create_user", user);
+		transactionHist.setProperty("modifi_user", user); 
+		
+		datastore.put(transactionHist);
+		
+		return "Transaction " + id + ": SUCCESS";
+	}
+	
+private String failTransaction(HttpServletRequest request) {
+	
+	Date currentDate = new Date();
+	UserService userService = UserServiceFactory.getUserService();
+	User user = userService.getCurrentUser();
+	
+	String transactionUID = request.getParameter("id");
+	
+	Key key = KeyFactory.createKey("Transaction",
+			Long.valueOf(transactionUID));
+
+	DatastoreService datastore = DatastoreServiceFactory
+			.getDatastoreService();
+	Query query = new Query("Transaction");
+	query.setFilter(FilterOperator.EQUAL.of("__key__", key));
+	PreparedQuery pq = datastore.prepare(query);
+
+	Entity transaction = pq.asSingleEntity();
+	
+	transaction.setProperty("status", TransactionStatus.FAIL.toString());
+	transaction.setProperty("modifi_date", currentDate); 
+	transaction.setProperty("modifi_user", user); 
+			
+	String id = datastore.put(transaction).toString();
+	
+	//add transaction history
+	Entity transactionHist = new Entity("TransactionHist", transaction.getKey());
+	transactionHist.setProperty("sms", request.getParameter("sms"));
+	transactionHist.setProperty("status", TransactionStatus.FAIL.toString());
+	transactionHist.setProperty("create_date", currentDate);
+	transactionHist.setProperty("modifi_date", currentDate); 
+	transactionHist.setProperty("create_user", user);
+	transactionHist.setProperty("modifi_user", user); 
+	
+	datastore.put(transactionHist);
+	
+	return "Transaction " + id + ": FAIL";
+}
 
 	private String addTransaction(HttpServletRequest request) {
+		
 		try {
 
 			String senderNumber = request.getParameter("sender");
@@ -115,17 +290,27 @@ public class TransactionController {
 			transaction.setProperty("desc", description);
 			transaction.setProperty("status", TransactionStatus.NEW.toString());
 			transaction.setProperty("create_date", createDate);
-			transaction.setProperty("modifi_date", createDate); // new
-																// transaction
+			transaction.setProperty("modifi_date", createDate); // new transaction
 			transaction.setProperty("create_user", user);
-			transaction.setProperty("modifi_user", user); // new transaction
+			transaction.setProperty("modifi_user", user); 		// new transaction
 
 			DatastoreService datastore = DatastoreServiceFactory
 					.getDatastoreService();
-			datastore.put(transaction);
+			String id = datastore.put(transaction).toString();
+
+			//add transaction history
+			Entity transactionHist = new Entity("TransactionHist", transaction.getKey());
+			transactionHist.setProperty("sms", originalSMS);
+			transactionHist.setProperty("status", TransactionStatus.NEW.toString());
+			transactionHist.setProperty("create_date", createDate);
+			transactionHist.setProperty("modifi_date", createDate); // new transaction
+			transactionHist.setProperty("create_user", user);
+			transactionHist.setProperty("modifi_user", user); 
 			
-			return receiverNumber + ":" + senderNumber + "_" + amount + "_"
-					+ description;
+			datastore.put(transactionHist);
+			
+			return receiverNumber + ":" + id + "_" + senderNumber + "_"
+					+ amount + "_" + description;
 		} catch (Exception e) {
 			return "ERROR: Unknow exception";
 		}
@@ -192,6 +377,8 @@ public class TransactionController {
 
 		if (!UserServiceFactory.getUserService().isUserLoggedIn())
 			return "loginPage";
+		else if (!UserServiceFactory.getUserService().isUserAdmin())
+			return "noPrivilege";
 
 		DatastoreService datastore = DatastoreServiceFactory
 				.getDatastoreService();
